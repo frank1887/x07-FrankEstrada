@@ -23,6 +23,14 @@ TicTacToeBoard::TicTacToeBoard()
 //Resets each board location to the Blank Piece value
 void TicTacToeBoard::clearBoard()
 {
+	for(int i = 0; i < BOARDSIZE; i++)
+	{
+		for(int j = 0; j < BOARDSIZE - 1; j++)
+		{
+			board[i][j] = Blank;
+		}
+
+	}
 
 }
 
@@ -62,7 +70,10 @@ Piece TicTacToeBoard::placePiece(int row, int column)
  **/
 Piece TicTacToeBoard::getPiece(int row, int column)
 {
-	return Invalid;
+	if(row > 2 || column > 2)
+		return Invalid;
+	else
+		return board[row][column];
 }
 
 /**

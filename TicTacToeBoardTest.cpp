@@ -58,28 +58,43 @@ TEST(TicTacToeBoardTest, rowOutOfBoundsFirstCoordinate)
 		shouldBeInvalid = false;
 	ASSERT_TRUE(shouldBeInvalid);
 }
-/*
-TEST(TicTacToeBoardTest, outOfBoundsSecondCoordinate)
+
+TEST(TicTacToeBoardTest, shouldPassClearBoard)
 {
 	TicTacToeBoard test;
-	Piece place = test.placePiece(1, 3);
-	bool shouldBeInvalid;
-	if(place == Invalid)
-		shouldBeInvalid = true;
+	bool shouldFail;
+	test.clearBoard();
+	Piece shouldBeBlank = test.getPiece(1,1);
+	if(shouldBeBlank == Blank)
+		shouldFail = true;
 	else
-		shouldBeInvalid = false;
-	ASSERT_TRUE(shouldBeInvalid);
+		shouldFail = false;
+	ASSERT_TRUE(shouldFail);
 }
 
-TEST(TicTacToeBoardTest, bothOutOfBounds)
+TEST(TicTacToeBoardTest, shouldFailClearBoard)
 {
 	TicTacToeBoard test;
-	Piece place = test.placePiece(8, 3);
-	bool shouldBeInvalid;
-	if(place == Invalid)
-		shouldBeInvalid = true;
+	bool shouldFail;
+	test.placePiece(1, 2);
+	test.clearBoard();
+	Piece shouldBeBlank = test.getPiece(1,2);
+	if(shouldBeBlank == Blank)
+		shouldFail = true;
 	else
-		shouldBeInvalid = false;
-	ASSERT_TRUE(shouldBeInvalid);
+		shouldFail = false;
+	ASSERT_TRUE(shouldFail);
 }
-*/
+
+TEST(TicTacToeBoardTest, shouldRecognizeOutOfBounds)
+{
+	TicTacToeBoard test;
+	bool shouldFail;
+	Piece outOfBounds = test.getPiece(1,3);
+	if(outOfBounds == Invalid)
+		shouldFail = true;
+	else
+		shouldFail = false;
+	ASSERT_TRUE(shouldFail);
+}
+
