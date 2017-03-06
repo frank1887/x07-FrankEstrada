@@ -26,7 +26,7 @@ void TicTacToeBoard::clearBoard()
 {
 	for(int i = 0; i < BOARDSIZE; i++)
 	{
-		for(int j = 0; j < BOARDSIZE - 1; j++)
+		for(int j = 0; j < BOARDSIZE; j++)
 		{
 			board[i][j] = Blank;
 		}
@@ -45,22 +45,25 @@ void TicTacToeBoard::clearBoard()
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
 	Piece toReturn;
-	if(row > 2)
+	if(row > 2 || column > 2 || row < 0 || column < 0)
 	{
 		toReturn = Invalid;
+		toggleTurn();
 	}
-	else
+	else if(board[row][column] != Blank)
 	{
-		if(turn == X)
-		{
-			toggleTurn();
-			toReturn = X;
-		}
-		else if(turn == O)
-		{
-			toggleTurn();
-			toReturn = O;
-		}
+		toReturn = board[row][column];
+		toggleTurn();
+	}	
+	else if(turn == X) {
+		toReturn = X;
+		toggleTurn();
+		board[row][column] = X;
+	}
+	else {
+		toReturn = O;
+		toggleTurn();
+		board[row][column] = O;
 	}
 	return toReturn;
 }
